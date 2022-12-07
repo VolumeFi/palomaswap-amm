@@ -16,6 +16,6 @@ homepage = "https://astroport.fi"
 backtraces = ["cosmwasm-std/backtraces"]
 
 [dependencies]
-cosmwasm-std = "1.1"
+cosmwasm-std = { version = "1.2.1", features = ["abort"] }
 cosmwasm-schema = "1.1"
 cw-storage-plus = "0.15"

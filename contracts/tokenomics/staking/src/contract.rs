@@ -23,7 +23,7 @@ const CONTRACT_VERSION: &str = env!("CARGO_PKG_VERSION");
 
 /// xASTRO information.
 const TOKEN_NAME: &str = "Staked Astroport";
-const TOKEN_SYMBOL: &str = "xASTRO";
+const TOKEN_SYMBOL: &str = "xCHIPS";
 
 /// A `reply` call code ID used for sub-messages.
 const INSTANTIATE_TOKEN_REPLY_ID: u64 = 1;

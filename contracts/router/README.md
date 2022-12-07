@@ -14,7 +14,7 @@ Initializes the contract with the Astroport factory contract address.
 
 ```json
 {
-  "astroport_factory": "terra..."
+  "astroport_factory": "paloma..."
 }
 ```
 
@@ -27,7 +27,7 @@ CW20 receive msg.
 ```json
 {
   "receive": {
-    "sender": "terra...",
+    "sender": "paloma...",
     "amount": "123",
     "msg": "<base64_encoded_json_string>"
   }
@@ -55,12 +55,12 @@ Swap UST => mABNB
           },
           "ask_asset_info": {
             "token": {
-              "contract_addr": "terra..."
+              "contract_addr": "paloma..."
             }
           }
         }
       },
-     "to": "terra...",
+     "to": "paloma...",
      "max_spread": "0.05",
      "single": false
    }
@@ -94,14 +94,14 @@ Swap KRT => UST => mABNB
           },
           "ask_asset_info": {
             "token": {
-              "contract_addr": "terra..."
+              "contract_addr": "paloma..."
             }
           }
         }
       }
     ],
     "minimum_receive": "123",
-    "to": "terra...",
+    "to": "paloma...",
     "max_spread": "0.05"
   }
 }
@@ -116,12 +116,12 @@ Checks that an amount of ask tokens exceeds `minimum_receive`. This message is f
   "assert_minimum_receive": {
     "asset_info": {
       "token": {
-        "contract_addr": "terra..."
+        "contract_addr": "paloma..."
       }
     },
     "prev_balance": "123",
     "minimum_receive": "123",
-    "receiver": "terra..."
+    "receiver": "paloma..."
   }
 }
 ```
@@ -166,7 +166,7 @@ Simulates multi-hop swap operations. Examples:
           },
           "ask_asset_info": {
             "token": {
-              "contract_addr": "terra..."
+              "contract_addr": "paloma..."
             }
           }
         }
@@ -193,7 +193,7 @@ Simulates multi-hop swap operations. Examples:
       "astro_swap": {
         "offer_asset_info": {
           "token": {
-            "contract_addr": "terra..."
+            "contract_addr": "paloma..."
           }
         },
         "ask_asset_info": {

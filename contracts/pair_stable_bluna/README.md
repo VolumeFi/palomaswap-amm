@@ -1,6 +1,6 @@
-# Astroport Base Stableswap Pair
+# Astroport bLUNA Specific Stableswap Pair
 
-The stableswap pool uses the 4A(Rx+Ry) + D formula, resulting in a constant price ∆x / ∆y = 1. More details around how the pool functions can be found [here](https://docs.astroport.fi/astroport/astroport/astro-pools/stableswap-invariant-pools).
+This pool is an extension to the vanilla stableswap implementation. It allows bLUNA-LUNA stableswap LPs to claim bLUNA rewards instead of leaving these rewards stuck in the pool contract.
 
 ---
 
@@ -18,7 +18,7 @@ As an example, let's say the global ratio between two tokens x:y is 1.01:1 (1 x 
 
 ### Slippage Tolerance for Providing Liquidity
 
-If a user specifies a slippage tolerance when they provide liquidity in a constant product pool, the pool contract makes sure that the transaction goes through only if the pool price does not change more than tolerance.
+If a user specifies a slippage tolerance when they provide liquidity in a constant product pool, the pool contract makes sure that the transaction goes through only if the pool price does not change more than the tolerance.
 
 As an example, let's say someone LPs in a pool and specifies a 1% slippage tolerance. The user LPs 200 UST and 200 `ASSET`. With a 1% slippage tolerance, `amountUSTMin` (the minimum amount of UST to LP) should be set to 198 UST, and `amountASSETMin` (the minimum amount of `ASSET` to LP) should be set to .99 `ASSET`. This means that, in a worst case scenario, liquidity will be added at a pool rate of 198 `ASSET`/1 UST or 202.02 UST/1 `ASSET` (200 UST + .99 `ASSET`). If the contract cannot add liquidity within these bounds (because the pool ratio changed more than the tolerance), the transaction will revert.
 
@@ -64,11 +64,9 @@ Initializes a new stableswap pair.
 
 ## ExecuteMsg
 
-## ExecuteMsg
-
 ### `receive`
 
-Withdraws liquidity or assets that were swapped to (ask assets from a swap operation).
+Withdraws liquidity or assets that were swapped to (the ask assets).
 
 ```json
 {
@@ -115,7 +113,7 @@ __NOTE__: you should increase your token allowance for the pool before providing
   }
 ```
 
-2. Provides the liquidity with a single token. We can do this only for the non-empty pool.
+2. Providing Liquidity With Slippage Tolerance
 
   ```json
   {
@@ -128,11 +126,19 @@ __NOTE__: you should increase your token allowance for the pool before providing
             }
           },
           "amount": "1000000"
+        },
+        {
+          "info": {
+            "native_token": {
+              "denom": "uusd"
+            }
+          },
+          "amount": "1000000"
         }
       ],
       "slippage_tolerance": "0.01",
       "auto_stake": false,
-      "receiver": "terra..."
+      "receiver": "paloma..."
     }
   }
 ```
@@ -181,7 +187,7 @@ Burn LP tokens and withdraw liquidity from a pool. This call must be sent to a L
 
 Perform a swap. `offer_asset` is your source asset and `to` is the address that will receive the ask assets. All fields are optional except `offer_asset`.
 
-NOTE: You should increase your token allowance for the pool before the swap.
+NOTE: You should increase your token allowance for the pool before a swap.
 
 ```json
   {
@@ -199,6 +205,33 @@ NOTE: You should increase your token allowance for the pool before the swap.
       "to": "paloma..."
     }
   }
+```
+
+### `claim_reward`
+
+Claims bLUNA rewards and sends a pro-rata share to the receiver.
+
+```json
+{
+  "claim_reward": {
+    "receiver": "paloma..."
+  }
+}
+```
+
+### `handle_reward`
+
+Handles bLUNA reward distributions.
+
+```json
+{
+  "handle_reward": {
+    "previous_reward_balance": 1000,
+    "old_total_share": 100,
+    "old_user_share": 10,
+    "user": "paloma..."
+  }
+}
 ```
 
 ### `update_config`
@@ -307,12 +340,12 @@ Returns the cumulative prices for the assets in the pair.
 }
 ```
 
-### `query_compute_d`
+### `pending_reward`
 
-Returns current D value for the pool.
+Returns the amount of bLUNA pending rewards that a LP can claim.
 
 ```json
 {
-  "query_compute_d": {}
+  "user": "paloma..."
 }
 ```

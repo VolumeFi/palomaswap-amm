@@ -67,7 +67,7 @@ fn instantiate_contracts(router: &mut App, owner: Addr) -> (Addr, Addr, Addr) {
             owner,
             &msg,
             &[],
-            String::from("xASTRO"),
+            String::from("xCHIPS"),
             None,
         )
         .unwrap();

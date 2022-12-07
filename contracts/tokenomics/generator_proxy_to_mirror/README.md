@@ -1,8 +1,6 @@
-# Astroport Generator Proxy Rewards Template
+# Astroport Generator Proxy for Mirror Protocol Staking Rewards
 
-This generator proxy contract allows an external staking contract to be connected to the Generator. It gives Generator stakers the ability to claim both ASTRO emissions as well as 3rd party tokens at the same time. This is referred to as "dual rewards" in Astroport.
-
-## Be sure that all the template's TODOs get properly changed!
+This generator proxy contract interacts with the MIR-UST staking contract. Stake and rewards based on locked LP token amount by liquidity pool providers (dual rewards feature). For a diagram of how dual reward proxies work, you can take a look [here](https://miro.medium.com/max/1400/0*8hn2NSnZJZTa9YGV).
 
 ---
 

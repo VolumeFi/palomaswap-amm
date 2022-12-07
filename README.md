@@ -1,10 +1,10 @@
-# Astroport Core
+# Palomaswap Core
 
 [![codecov](https://codecov.io/gh/astroport-fi/astroport-core/branch/main/graph/badge.svg?token=ROOLZTGZMM)](https://codecov.io/gh/astroport-fi/astroport-core)
 
-Multi pool type automated market-maker (AMM) protocol powered by smart contracts on the [Terra](https://terra.money) blockchain.
+Multi pool type automated market-maker (AMM) protocol powered by smart contracts on the [Paloma](https://www.palomachain.com/) blockchain. This AMM is a fork of the Astroport AMM codebase and aims to integrate and allow cross-AMM trade execution with Astroport at launch.
 
-## Contracts diagram
+## Contracts diagram (baed on Astroport)
 
 ![contract diagram](./assets/sc_diagram.png "Contracts Diagram")
 
@@ -39,8 +39,8 @@ Tokenomics related smart contracts are hosted on ../contracts/tokenomics.
 You will need Rust 1.64.0+ with wasm32-unknown-unknown target installed.
 
 ### You can compile each contract:
-Go to contract directory and run 
-    
+Go to contract directory and run
+
 ```
 cargo wasm
 cp ../../target/wasm32-unknown-unknown/release/astroport_token.wasm .
